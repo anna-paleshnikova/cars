@@ -1,0 +1,32 @@
+{
+  "customers": [
+    {
+      "name": "Ivan",
+      "isActive": true,
+      "email": "ivan@abv.bg",
+      "role": "admin",
+      "phone": "123123",
+      "password": "ivanivan",
+      "id": 1
+    },
+    {
+      "name": "asdasd",
+      "email": "asdasd@abv.bg",
+      "isActive": true,
+      "role": "customer",
+      "phone": "123123123",
+      "password": "asdasdasd",
+      "id": 2
+    },
+    {
+      "name": "etetet",
+      "email": "etete@abv.bg",
+      "isActive": true,
+      "role": "customer",
+      "phone": "123123",
+      "password": "asdasd",
+      "id": 3
+    }
+  ],
+  "cars":[]
+}
