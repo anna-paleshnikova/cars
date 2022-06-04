@@ -32,7 +32,7 @@ export function CustomerCard({ user, deleteUser, isInDetails }) {
           <span className="value">{user.phone}</span>
         </Card.Text>
         <div className="btn-holder">
-          {loggedUser.role === "admin" ? (
+          {loggedUser.role === "admin" || loggedUser.id === user.id ? (
             <Button variant="primary" onClick={redirectToEdit}>
               Edit
             </Button>

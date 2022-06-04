@@ -10,7 +10,6 @@ import {
 
 export function Header() {
   const loggedUser = getLoggedUser();
-  const taskUrl = `/tasks/${loggedUser.id}`;
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -23,25 +22,31 @@ export function Header() {
     <div className="header">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Rent a car</Navbar.Brand>
+          <Navbar.Brand href="/">Rent a car</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link className="nav-link" to="/customer-list">
                 Customer List
               </Link>
-              <Link className="nav-link" to="/customer/create">
-                Create Customer
-              </Link>
-              <Link className="nav-link" to="/tasks-list">
+              {loggedUser.role === "admin" ? (
+                <Link className="nav-link" to="/customer/create">
+                  Create Customer
+                </Link>
+              ) : null}
+
+              <Link className="nav-link" to="/cars-list">
                 All Cars
               </Link>
-              <Link className="nav-link" to={taskUrl}>
+              <Link className="nav-link" to="/customer/rented-cars">
                 My rented cars
               </Link>
-              <Link className="nav-link" to="/task/create">
-                Create car
-              </Link>
+
+              {loggedUser.role === "admin" ? (
+                <Link className="nav-link" to="/car/create">
+                  Create car
+                </Link>
+              ) : null}
             </Nav>
             <span className="nav-link logout-btn" onClick={logoutHandler}>
               Logout

@@ -1,32 +1,100 @@
 {
   "customers": [
     {
-      "name": "Ivan",
+      "name": "Anna",
       "isActive": true,
-      "email": "ivan@abv.bg",
+      "email": "anna@abv.bg",
       "role": "admin",
       "phone": "123123",
-      "password": "ivanivan",
+      "password": "anna",
       "id": 1
     },
     {
-      "name": "asdasd",
-      "email": "asdasd@abv.bg",
+      "name": "Ivan",
+      "email": "ivan@abv.bg",
       "isActive": true,
       "role": "customer",
       "phone": "123123123",
-      "password": "asdasdasd",
+      "password": "ivan",
       "id": 2
     },
     {
-      "name": "etetet",
-      "email": "etete@abv.bg",
+      "name": "Pesho",
+      "email": "pesho@abv.bg",
       "isActive": true,
       "role": "customer",
       "phone": "123123",
-      "password": "asdasd",
+      "password": "pesho",
       "id": 3
+    },
+    {
+      "name": "testcustomer123",
+      "email": "customer@abv.bg",
+      "isActive": true,
+      "role": "customer",
+      "phone": "123123",
+      "password": "customer",
+      "id": 4
     }
   ],
-  "cars":[]
+  "cars": [
+    {
+      "type": "sedan",
+      "brand": "BMWWWWW",
+      "model": "E90E90",
+      "year": "2008",
+      "fuel": "petrol",
+      "seats": "4",
+      "picture": "https://maserati.scene7.com/is/image/maserati/maserati/international/Models/my22/grecale/my22/modena/169/Maserati_Grecale_Modena_FULL_FRONT.jpg?$1920x2000$&fit=constrain",
+      "pricePerDay": "2",
+      "availableCount": 7,
+      "id": 1,
+      "rented": false,
+      "rentedByCustomer": [
+        {
+          "customerId": 4,
+          "rentedFinalPrice": null,
+          "startDate": "",
+          "endDate": ""
+        },
+        {
+          "customerId": 4,
+          "rentedFinalPrice": 15.2,
+          "startDate": "2022-06-21",
+          "endDate": "2022-06-29"
+        }
+      ],
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "type": "luxury",
+      "brand": "asdasdasd",
+      "model": "BMW",
+      "year": "213",
+      "fuel": "diesel",
+      "seats": "4",
+      "picture": "https://picsum.photos/200/300?random=0.5243000441660879",
+      "pricePerDay": "2",
+      "availableCount": 8,
+      "id": 2,
+      "rented": false,
+      "rentedByCustomer": [
+        {
+          "customerId": 4,
+          "rentedFinalPrice": 2,
+          "startDate": "2022-06-22",
+          "endDate": "2022-06-23"
+        },
+        {
+          "customerId": 1,
+          "rentedFinalPrice": 7.6,
+          "startDate": "2022-06-28",
+          "endDate": "2022-06-24"
+        }
+      ],
+      "startDate": "",
+      "endDate": ""
+    }
+  ]
 }

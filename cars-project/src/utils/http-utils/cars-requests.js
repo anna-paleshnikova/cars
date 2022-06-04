@@ -1,9 +1,5 @@
 import axios from "axios";
 
-export const CarStatus = {
-  RENTED: false,
-};
-
 const apiUrl = "http://localhost:3005/cars";
 
 export function getAllCars() {
@@ -21,7 +17,7 @@ export function saveCar(car) {
   if (car.id) {
     return axios.put(`${apiUrl}/${car.id}`, car);
   }
-  return axios.put(`${apiUrl}/${car.id}`, car);
+  return axios.post(`${apiUrl}`, car);
 }
 
 export function deleteCar(id) {

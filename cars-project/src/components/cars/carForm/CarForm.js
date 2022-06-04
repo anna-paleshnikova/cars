@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getCarById,
-  saveCar,
-  CarStatus,
-} from "../../../utils/http-utils/cars-requests";
+import { getCarById, saveCar } from "../../../utils/http-utils/cars-requests";
 import "./CarForm.scss";
 
 export function CarForm() {
@@ -14,16 +10,19 @@ export function CarForm() {
   const params = useParams();
   const [car, setCar] = useState({
     type: "",
-    vehicle: {
-      brand: "",
-      model: "",
-      year: "",
-    },
+    brand: "",
+    model: "",
+    year: "",
     fuel: "",
     seats: "",
     picture: "",
     pricePerDay: "",
     availableCount: 0,
+    rented: false,
+    startData: "",
+    endDate: "",
+    rentedByCustomer: "",
+    rentedFinalPrice: "",
   });
 
   useEffect(() => {
@@ -41,55 +40,71 @@ export function CarForm() {
     }));
   };
 
-  const onTaskSubmit = (event) => {
+  const onCarSubmit = (event) => {
     event.preventDefault();
 
     saveCar(car).then(() => {
-      navigate("/car-list");
+      navigate("/cars-list");
     });
   };
 
   return (
     <div className="task-form-wrapper">
-      <Form onSubmit={onTaskSubmit}>
+      <Form onSubmit={onCarSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>type</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter title"
+          <Form.Label>Type</Form.Label>
+          <Form.Select
+            required
             name="type"
-            value={car.type}
+            value={car.role}
             onChange={onInputChange}
-          />
+          >
+            <option value="economy">Economy</option>
+            <option value="estate">Estate</option>
+            <option value="luxury">Luxury</option>
+            <option value="suv">Suv</option>
+            <option value="cargo">Cargo</option>
+          </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>car</Form.Label>
+          <Form.Label>Brand:</Form.Label>
           <Form.Control
+            required
             type="text"
-            placeholder="Enter description"
+            placeholder="Enter brand"
             name="brand"
             value={car.brand}
             onChange={onInputChange}
           />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Model</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter description"
+            required
+            placeholder="Enter model"
             name="model"
             value={car.model}
             onChange={onInputChange}
           />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Year:</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter description"
+            type="number"
+            required
+            placeholder="Enter year"
             name="year"
             value={car.year}
             onChange={onInputChange}
           />
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>car picture</Form.Label>
           <Form.Control
             type="text"
+            required
             placeholder="Enter picture url"
             name="picture"
             value={car.picture}
@@ -98,18 +113,23 @@ export function CarForm() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>fuel</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="fuel"
+          <Form.Select
+            required
             name="fuel"
             value={car.fuel}
             onChange={onInputChange}
-          />
+          >
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="electric">Electric</option>
+          </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>seats</Form.Label>
           <Form.Control
-            type="text"
+            required
+            type="number"
             placeholder="seats"
             name="seats"
             value={car.seats}
@@ -120,6 +140,7 @@ export function CarForm() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>pricePerDay</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="pricePerDay"
             name="pricePerDay"
@@ -131,7 +152,8 @@ export function CarForm() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>availableCount</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
+            required
             placeholder="availableCount"
             name="availableCount"
             value={car.availableCount}

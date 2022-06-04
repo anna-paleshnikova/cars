@@ -1,104 +1,38 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {   useNavigate} from "react-router-dom";
 import {
-  deleteTask,
-  getAllTasks,
-  getAllTasksForAuthor,
-  saveTask,
-  TaskStatus,
-} from "../../../utils/http-utils/car-requests";
-import { CarCard } from "../CarCard/CarCard";
+  deleteCar,
+  getAllCars,
+} from "../../../utils/http-utils/cars-requests";
+import {CarCard} from "../carCard/CarCard"
 
 import "./CarList.scss";
 
 export function CarList() {
-  const [tasks, setTasks] = useState([]);
-  const params = useParams();
+  const [cars, setCars] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (params.id) {
-      getAllTasksForAuthor(params.id).then((response) => {
-        setTasks(response.data);
+      getAllCars().then((response) => {
+        setCars(response.data);
       });
-    } else {
-      getAllTasks().then((response) => {
-        setTasks(response.data);
-      });
-    }
-  }, [params.id]);
+  }, []);
 
   const onDeleteHandler = (id) => {
-    deleteTask(id).then(() => {
-      setTasks((prevState) => {
-        return prevState.filter((task) => task.id !== id);
+    deleteCar(id).then(() => {
+      setCars((prevState) => {
+        return prevState.filter((car) => car.id !== id);
       });
     });
   };
 
-  const onChangeStatusHandler = (status, id) => {
-    const task = tasks.find((task) => task.id === id);
-    task.status = status;
-    saveTask(task).then(() => {
-      setTasks([...tasks]);
-    });
-  };
-
-  const getTasksWithStatus = (status) => {
-    return tasks
-      .filter((task) => task.status === status)
-      .map((task) => (
-        <CarCard
-          key={task.id}
-          task={task}
-          onTaskDelete={onDeleteHandler}
-          changeStatus={onChangeStatusHandler}
-        />
-      ));
-  };
-
-  const onDropHandler = (event, status) => {
-    event.preventDefault();
-
-    const taskId = event.dataTransfer.getData("taskId");
-    onChangeStatusHandler(status, taskId);
-  };
+  if(cars.length === 0) {
+    navigate("/")
+  }
 
   return (
     <div className="tasks-list-wrapper">
-      {/* { tasks.map(task => <TaskCard key={task.id} task={task} onTaskDelete={onDeleteHandler} changeStatus={onChangeStatusHandler} />) } */}
-
-      <div
-        className="status new"
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => onDropHandler(event, TaskStatus.NEW)}
-      >
-        <div className="column-header">New</div>
-        {getTasksWithStatus(TaskStatus.NEW)}
-      </div>
-      <div
-        className="status in-progress"
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => onDropHandler(event, TaskStatus.IN_PROGRESS)}
-      >
-        <div className="column-header">In Progress</div>
-        {getTasksWithStatus(TaskStatus.IN_PROGRESS)}
-      </div>
-      <div
-        className="status in-review"
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => onDropHandler(event, TaskStatus.IN_REVIEW)}
-      >
-        <div className="column-header">In review</div>
-        {getTasksWithStatus(TaskStatus.IN_REVIEW)}
-      </div>
-      <div
-        className="status done"
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => onDropHandler(event, TaskStatus.DONE)}
-      >
-        <div className="column-header">Done</div>
-        {getTasksWithStatus(TaskStatus.DONE)}
-      </div>
+      { cars.map(car => <CarCard key={car.id} car={car} onCarDelete={onDeleteHandler} />) }
     </div>
   );
 }

@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 60px);
-
+    margin: 23px auto 20px auto;
     form {
         padding: 10px;
         border: 1px solid gray;
         border-radius: 5px;
-
+        width: 100%;
+        max-width: 300px;
         div {
             margin: 25px;
         }

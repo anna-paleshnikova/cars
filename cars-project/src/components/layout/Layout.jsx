@@ -1,11 +1,10 @@
 import { Header } from "../header/Header";
-import { Main } from "../main/Main";
 
-export function Layout() {
+export function Layout({children}) {
     return (
         <div>
             <Header />
-            <Main />
+            {children}
         </div>
     );
 }

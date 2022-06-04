@@ -81,6 +81,7 @@ export function CustomerForm() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Full name</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Enter name"
             name="name"
@@ -92,6 +93,7 @@ export function CustomerForm() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+            required
             type="email"
             placeholder="Enter email"
             name="email"
@@ -104,6 +106,7 @@ export function CustomerForm() {
           <Form.Label>Phone</Form.Label>
           <Form.Control
             type="tel"
+            required
             placeholder="Enter phone"
             name="phone"
             value={user.phone}
